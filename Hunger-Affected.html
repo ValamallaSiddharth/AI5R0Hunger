@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Hunger-Affected Locations</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            background-color: #00FFFF;
+            color: black;
+        }
+        h1 {
+            background: #1B5E20;
+            color: white;
+            padding: 15px;
+            margin: 0;
+            box-shadow: 0 4px 8px rgba(255, 87, 51, 0.6);
+        }
+        #map {
+            height: 550px;
+            width: 100%;
+            margin: 20px auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(255, 87, 51, 0.6);
+        }
+        p {
+            font-size: 18px;
+            color: #424242;
+        }
+    </style>
+</head>
+<body>
+    <h1>Hunger-Affected Locations</h1>
+    <p>Tracking areas facing food scarcity using real-time data.</p>
+    <div id="map"></div>
+
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script>
+        var map = L.map('map').setView([20.0, 0.0], 2);
+
+        L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
+            attribution: '&copy; OpenStreetMap contributors',
+            detectRetina: true
+        }).addTo(map);
+
+        var locations = [
+            { name: "Chad", coords: [15.4542, 18.7322] },
+            { name: "South Sudan", coords: [6.8770, 31.3070] },
+            { name: "Yemen", coords: [15.5527, 48.5164] },
+            { name: "Somalia", coords: [5.1521, 46.1996] },
+            { name: "Madagascar", coords: [18.7669, 46.8691] }
+        ];
+
+        locations.forEach(location => {
+            L.marker(location.coords)
+                .addTo(map)
+                .bindPopup(`<b>${location.name}</b><br>Facing severe hunger crisis.`);
+        });
+    </script>
+</body>
+</html>
